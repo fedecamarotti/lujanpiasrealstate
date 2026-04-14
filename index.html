@@ -206,82 +206,89 @@
   /* ── BLOQUE 2: CONOCENOS ── */
   #conocenos {
     background: var(--white);
-    color: var(--black);
+    color: #1a1a1a;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     min-height: 100vh;
+  }
+
+  .conocenos-foto {
+    overflow: hidden;
+  }
+
+  .conocenos-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .conocenos-texto {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    padding: 120px 48px;
+    padding: 80px 72px;
   }
 
-  .conocenos-inner {
-    max-width: 680px;
-    text-align: center;
-  }
-
-  .section-label {
-    display: inline-block;
-    font-family: var(--font-body);
-    font-size: 9px;
-    font-weight: 400;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--gold);
+  .conocenos-eyebrow {
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
     margin-bottom: 32px;
   }
 
   .conocenos-title {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 7vw, 6rem);
-    font-weight: 300;
-    letter-spacing: 0.1em;
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    font-weight: 400;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--black);
-    line-height: 1;
+    color: #111;
+    line-height: 1.1;
+    margin-bottom: 32px;
   }
 
-  .conocenos-divider {
-    display: block;
-    width: 1px;
-    height: 60px;
-    background: var(--gold);
-    margin: 40px auto;
-    opacity: 0.5;
+  .conocenos-title em {
+    font-style: normal;
+    color: var(--gold);
   }
 
-  .conocenos-text {
+  .conocenos-body {
+    font-family: var(--font-body);
     font-size: 13px;
     font-weight: 300;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     line-height: 2;
     color: #555;
   }
 
-  /* ── BLOQUE 3: PROYECTOS ── */
-  #proyectos {
-    background: var(--mid);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 120px 48px;
-    position: relative;
-    overflow: hidden;
+  .conocenos-body p + p {
+    margin-top: 20px;
   }
 
-  #proyectos::before {
-    content: '';
-    position: absolute;
-    top: -1px; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    opacity: 0.4;
+  @media (max-width: 700px) {
+    #conocenos { grid-template-columns: 1fr; }
+    .conocenos-foto { height: 60vw; }
+    .conocenos-texto { padding: 52px 28px; }
   }
 
-  .proyectos-inner {
+  /* ── PROYECTOS HEADER ── */
+  #proyectos-header {
+    padding: 100px 48px 60px;
     text-align: center;
     position: relative;
-    z-index: 1;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, #1e1e1e 0%, #0a0a0a 100%);
+  }
+
+  #proyectos-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.3;
   }
 
   .proyectos-title {
@@ -295,9 +302,311 @@
   }
 
   .proyectos-title em {
-    display: block;
     font-style: normal;
     color: var(--gold);
+  }
+
+  /* ── PROYECTO ROW ── */
+  .proyecto-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 580px;
+    position: relative;
+  }
+
+  .proyecto-row::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 6%; right: 6%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,169,110,0.25), transparent);
+  }
+
+  /* dark rows */
+  .proyecto-row.dark {
+    background: radial-gradient(ellipse 120% 100% at 50% 50%, #1c1c1c 0%, #0d0d0d 100%);
+    color: var(--white);
+  }
+
+  /* light rows */
+  .proyecto-row.light {
+    background: radial-gradient(ellipse 120% 100% at 50% 50%, #f9f7f3 0%, #ede9e2 100%);
+    color: #1a1a1a;
+  }
+
+  /* ── CAROUSEL ── */
+  .carousel-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.77,0,0.18,1);
+  }
+
+  .carousel-track img {
+    min-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: background 0.25s;
+  }
+
+  .carousel-btn:hover { background: rgba(0,0,0,0.7); }
+  .carousel-btn.prev { left: 14px; }
+  .carousel-btn.next { right: 14px; }
+
+  .carousel-btn svg {
+    width: 14px; height: 14px;
+    stroke: #fff; stroke-width: 1.8; fill: none;
+  }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 14px;
+    left: 50%; transform: translateX(-50%);
+    display: flex; gap: 7px; z-index: 5;
+  }
+
+  .carousel-dots span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+
+  .carousel-dots span.active {
+    background: var(--gold);
+    transform: scale(1.3);
+  }
+
+  /* ── PROJECT TEXT ── */
+  .proyecto-text {
+    padding: 56px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .proyecto-tag {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+
+  .proyecto-nombre {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .dark .proyecto-nombre { color: var(--white); }
+  .light .proyecto-nombre { color: #111; }
+
+  .proyecto-direccion {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .dark .proyecto-direccion { color: rgba(245,243,239,0.45); }
+  .light .proyecto-direccion { color: #888; }
+
+  .proyecto-divider {
+    width: 32px; height: 1px;
+    background: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 24px;
+  }
+
+  .proyecto-body {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.95;
+    overflow: hidden;
+    position: relative;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .dark .proyecto-body { color: rgba(245,243,239,0.72); }
+  .light .proyecto-body { color: #444; }
+
+  .proyecto-body.clamped::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 48px;
+    pointer-events: none;
+  }
+
+  .dark .proyecto-body.clamped::after {
+    background: linear-gradient(transparent, #111);
+  }
+
+  .light .proyecto-body.clamped::after {
+    background: linear-gradient(transparent, #ede9e2);
+  }
+
+  .ver-mas-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 0;
+    transition: opacity 0.25s;
+  }
+
+  .ver-mas-btn:hover { opacity: 0.7; }
+
+  .ver-mas-btn svg {
+    width: 12px; height: 12px;
+    stroke: var(--gold); stroke-width: 1.8; fill: none;
+    transition: transform 0.3s;
+  }
+
+  .ver-mas-btn:hover svg { transform: translateY(2px); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5,5,5,0.88);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s;
+    padding: 40px 24px;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal-box {
+    background: #141414;
+    border: 1px solid rgba(201,169,110,0.18);
+    max-width: 640px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 52px 48px 48px;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.35s;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) transparent;
+  }
+
+  .modal-overlay.open .modal-box { transform: translateY(0); }
+
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(245,243,239,0.5);
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.25s;
+  }
+
+  .modal-close:hover { color: var(--white); }
+
+  .modal-close svg {
+    width: 14px; height: 14px;
+    stroke: currentColor; stroke-width: 1.5; fill: none;
+  }
+
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .modal-dir {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,243,239,0.4);
+    margin-bottom: 28px;
+  }
+
+  .modal-divider {
+    width: 32px; height: 1px;
+    background: var(--gold); opacity: 0.5;
+    margin-bottom: 24px;
+  }
+
+  .modal-content {
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 300;
+    line-height: 2;
+    color: rgba(245,243,239,0.72);
   }
 
   /* ── KEYFRAMES ── */
@@ -312,10 +621,15 @@
   }
 
   /* ── MOBILE ── */
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     nav { padding: 20px 24px; }
     .scroll-cta { bottom: 32px; }
-    #conocenos, #proyectos { padding: 80px 24px; }
+    #conocenos { padding: 80px 24px; }
+    #proyectos-header { padding: 70px 24px 48px; }
+    .proyecto-row { grid-template-columns: 1fr; }
+    .carousel-wrap { height: 260px; }
+    .proyecto-text { padding: 36px 24px; }
+    .modal-box { padding: 40px 24px 32px; }
   }
 </style>
 </head>
@@ -349,20 +663,275 @@
 
 <!-- CONOCENOS -->
 <section id="conocenos">
-  <div class="conocenos-inner">
-    <span class="section-label">Quiénes somos</span>
-    <h2 class="conocenos-title">Conocenos</h2>
-    <span class="conocenos-divider"></span>
-    <p class="conocenos-text">Texto sobre la empresa irá aquí.</p>
+  <div class="conocenos-foto">
+    <img src="image/lujan.png" alt="Luján Pías">
+  </div>
+  <div class="conocenos-texto">
+    <span class="conocenos-eyebrow"></span>
+    <h2 class="conocenos-title">Luján Pías<br><em>Real Estate</em></h2>
+    <div class="conocenos-body">
+      <p>Soy Luján Pías, Fundadora y Directora de Luján Pías Real Estate.</p>
+      <p>Años de experiencia en el mundo inmobiliario, la confianza de los mejores Desarrolladores de Buenos Aires y de Clientes fieles, fueron mi motivación para crear esta compañía. Me acompaña un Equipo de profesionales comprometidos en brindar el mejor servicio inmobiliario.</p>
+    </div>
   </div>
 </section>
 
-<!-- PROYECTOS -->
-<section id="proyectos">
-  <div class="proyectos-inner">
-    <h2 class="proyectos-title">Nuestros <em>Proyectos</em></h2>
-  </div>
+<!-- PROYECTOS HEADER -->
+<section id="proyectos-header">
+  <h2 class="proyectos-title">Nuestros <em>Proyectos</em></h2>
 </section>
 
-</body>
-</html>
+<!-- PROYECTO 1: DONNA FIORE — carousel left, text right -->
+<div class="proyecto-row dark" id="proj-1">
+  <div class="carousel-wrap">
+    <div class="carousel-track">
+      <img src="image/donnafiore01.png" alt="Donna Fiore 1">
+      <img src="image/donnafiore02.png" alt="Donna Fiore 2">
+      <img src="image/donnafiore03.png" alt="Donna Fiore 3">
+    </div>
+    <button class="carousel-btn prev" onclick="slide(this,-1)">
+      <svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg>
+    </button>
+    <button class="carousel-btn next" onclick="slide(this,1)">
+      <svg viewBox="0 0 14 14"><polyline points="5,2 10,7 5,12"/></svg>
+    </button>
+    <div class="carousel-dots">
+      <span class="active"></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="proyecto-text">
+    <h3 class="proyecto-nombre">Donna Fiore</h3>
+    <p class="proyecto-direccion">Avenida Pedro Goyena 1700, Caballito</p>
+    <div class="proyecto-divider"></div>
+    <div class="proyecto-body" data-full="Donna Fiore es un edificio exclusivo de 13 pisos con amplias unidades de 160 a 370m2.
+
+Combina exclusividad, confort, diseño arquitectónico, y arte.
+
+Últimas unidades disponibles 4 y 5 ambientes con dependencias.
+
+Departamentos con balcones aterrazados, ambientes amplios con cocinas integradas, todos los dormitorios en suite y un área de servicio con lavadero, despensa, habitación y baño.
+
+✨ Amenities de lujo:
+· Salón de eventos
+· Rooftop con pileta vidriada
+· Solarium
+· Parrilleros
+· Jardines en altura
+· Gimnasio
+· Spa y sauna
+
+Entrega inmediata."></div>
+    <button class="ver-mas-btn" onclick="openModal(this)">
+      Ver más
+      <svg viewBox="0 0 12 12"><polyline points="2,4 6,9 10,4"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- PROYECTO 2: DONNA VITA — text left, carousel right -->
+<div class="proyecto-row light" id="proj-2">
+  <div class="proyecto-text">
+    <h3 class="proyecto-nombre">Donna Vita</h3>
+    <p class="proyecto-direccion">Riglos 750 & Avenida Directorio 571, Caballito</p>
+    <div class="proyecto-divider"></div>
+    <div class="proyecto-body" data-full="Donna Vita combina arquitectura y entorno de manera equilibrada.
+
+Compuesto por dos edificaciones, un quíntuple frente sobre Riglos y un doble frente sobre Av. Directorio, conectados por un gran espacio central al aire libre.
+
+Las unidades cuentan con ambientes integrados, donde cocina y living se fusionan para potenciar la amplitud, la luz natural y la vida social.
+
+🌿 Amenities:
+· Piscina adultos
+· Piscina niños
+· Solárium
+· Gimnasio
+· Spa y sauna
+· Parrilleros
+· Coworking
+· Salón de eventos
+
+Últimas unidades disponibles 2, 3 y 4 ambientes.
+
+Entrega inmediata."></div>
+    <button class="ver-mas-btn" onclick="openModal(this)">
+      Ver más
+      <svg viewBox="0 0 12 12"><polyline points="2,4 6,9 10,4"/></svg>
+    </button>
+  </div>
+  <div class="carousel-wrap">
+    <div class="carousel-track">
+      <img src="image/donnavita01.png" alt="Donna Vita 1">
+      <img src="image/donnavita02.png" alt="Donna Vita 2">
+      <img src="image/donnavita03.png" alt="Donna Vita 3">
+    </div>
+    <button class="carousel-btn prev" onclick="slide(this,-1)">
+      <svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg>
+    </button>
+    <button class="carousel-btn next" onclick="slide(this,1)">
+      <svg viewBox="0 0 14 14"><polyline points="5,2 10,7 5,12"/></svg>
+    </button>
+    <div class="carousel-dots">
+      <span class="active"></span><span></span><span></span>
+    </div>
+  </div>
+</div>
+
+<!-- PROYECTO 3: SO RIVERIE — carousel left, text right -->
+<div class="proyecto-row dark" id="proj-3">
+  <div class="carousel-wrap">
+    <div class="carousel-track">
+      <img src="image/soriverie01.png" alt="So Riverie 1">
+      <img src="image/soriverie02.png" alt="So Riverie 2">
+      <img src="image/soriverie03.png" alt="So Riverie 3">
+    </div>
+    <button class="carousel-btn prev" onclick="slide(this,-1)">
+      <svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg>
+    </button>
+    <button class="carousel-btn next" onclick="slide(this,1)">
+      <svg viewBox="0 0 14 14"><polyline points="5,2 10,7 5,12"/></svg>
+    </button>
+    <div class="carousel-dots">
+      <span class="active"></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="proyecto-text">
+    <h3 class="proyecto-nombre">So Riverie, Nordelta</h3>
+    <p class="proyecto-direccion">Avenida del Puerto 2035, Nordelta</p>
+    <div class="proyecto-divider"></div>
+    <div class="proyecto-body" data-full="So Riverie es el desembarco de AZCUY en Nordelta.
+
+Son dos edificios de 100 metros de fachada cada uno al agua sobre el Canal Mayor, frente al Barrio El Yatch y a metros del Río Luján.
+
+Unidades 2 | 3 | 4 | 5 ambientes.
+Desde 90 m² hasta 730 m².
+
+Departamentos con jacuzzis, piscinas privadas, jardines y dúplex con quinchos y terrazas.
+
+✨ Amenities de lujo:
+· Servicio de concierge
+· Servicio náutico y de paisajismo
+· Piscina central
+· Salón de fiestas
+· Parrilleros
+· Wine Bar
+· Área gastronómica
+· Espacio de Arte
+· Sala de juegos
+· Playón deportivo
+· Salón Kids
+· Gym station
+· Senda aeróbica
+· Huerta
+
+Forma de pago: 30% de anticipo y cuotas fijas en dólares hasta la posesión.
+
+Entrega 2028.
+
+Una combinación de arquitectura, paisaje y arte genera una conexión con el entorno, integrando sostenibilidad y calidad en cada detalle.
+
+Su proximidad a la Bahía Grande y al Centro Comercial Nordelta ofrece acceso a gastronomía, tiendas, servicios y opciones recreativas."></div>
+    <button class="ver-mas-btn" onclick="openModal(this)">
+      Ver más
+      <svg viewBox="0 0 12 12"><polyline points="2,4 6,9 10,4"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">
+      CERRAR
+      <svg viewBox="0 0 14 14"><line x1="2" y1="2" x2="12" y2="12"/><line x1="12" y1="2" x2="2" y2="12"/></svg>
+    </button>
+    <h3 class="modal-title" id="modal-title"></h3>
+    <p class="modal-dir" id="modal-dir"></p>
+    <div class="modal-divider"></div>
+    <div class="modal-content" id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+// ── CAROUSEL ──
+function slide(btn, dir) {
+  const wrap = btn.closest('.carousel-wrap');
+  const track = wrap.querySelector('.carousel-track');
+  const imgs = track.querySelectorAll('img');
+  const dots = wrap.querySelectorAll('.carousel-dots span');
+  let cur = parseInt(track.dataset.cur || 0);
+  cur = (cur + dir + imgs.length) % imgs.length;
+  track.dataset.cur = cur;
+  track.style.transform = `translateX(-${cur * 100}%)`;
+  dots.forEach((d,i) => d.classList.toggle('active', i === cur));
+}
+
+// auto-advance
+document.querySelectorAll('.carousel-wrap').forEach(wrap => {
+  let cur = 0;
+  const track = wrap.querySelector('.carousel-track');
+  const imgs = track.querySelectorAll('img');
+  const dots = wrap.querySelectorAll('.carousel-dots span');
+  setInterval(() => {
+    cur = (cur + 1) % imgs.length;
+    track.dataset.cur = cur;
+    track.style.transform = `translateX(-${cur * 100}%)`;
+    dots.forEach((d,i) => d.classList.toggle('active', i === cur));
+  }, 4500);
+
+  // dot clicks
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      cur = i;
+      track.dataset.cur = cur;
+      track.style.transform = `translateX(-${cur * 100}%)`;
+      dots.forEach((d,j) => d.classList.toggle('active', j === cur));
+    });
+  });
+});
+
+// ── CLAMP TEXT to match carousel height ──
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function clampTexts() {
+  document.querySelectorAll('.proyecto-row').forEach(row => {
+    const body = row.querySelector('.proyecto-body');
+    const btn = row.querySelector('.ver-mas-btn');
+    if (!body) return;
+
+    const full = body.dataset.full || '';
+    body.innerHTML = escapeHtml(full).replace(/\n/g, '<br>');
+
+    if (body.scrollHeight > body.clientHeight + 4) {
+      body.classList.add('clamped');
+      btn.style.display = 'inline-flex';
+    } else {
+      body.classList.remove('clamped');
+      btn.style.display = 'none';
+    }
+  });
+}
+
+window.addEventListener('load', clampTexts);
+window.addEventListener('resize', clampTexts);
+
+// ── MODAL ──
+function openModal(btn) {
+  const row = btn.closest('.proyecto-row');
+  const nombre = row.querySelector('.proyecto-nombre').textContent;
+  const dir = row.querySelector('.proyecto-direccion').textContent;
+  const full = row.querySelector('.proyecto-body').dataset.full;
+  document.getElementById('modal-title').textContent = nombre;
+  document.getElementById('modal-dir').textContent = dir;
+  document.getElementById('modal-content').innerHTML = escapeHtml(full).replace(/\n/g, '<br>');
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modal')) return;
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
