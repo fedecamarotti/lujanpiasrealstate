@@ -87,12 +87,17 @@
   .hero-bg {
     position: absolute;
     inset: 0;
-    background-image: url('image/hero.jpg');
+    background-image: url('image/fondohome.jpg');
     background-size: cover;
     background-position: center;
-    filter: brightness(0.28);
     transform: scale(1.04);
     transition: transform 8s ease;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 8, 8, 0.72);
   }
 
   #hero:hover .hero-bg { transform: scale(1); }
@@ -105,37 +110,33 @@
     animation: fadeUp 1.4s cubic-bezier(0.16,1,0.3,1) both;
   }
 
-  .hero-eyebrow {
+  .hero-logo {
     display: block;
-    width: 40px;
-    height: 1px;
-    background: var(--gold);
-    margin: 0 auto 32px;
-    opacity: 0.8;
+    width: clamp(120px, 18vw, 200px);
+    margin: 0 auto 36px;
+    opacity: 0.95;
   }
 
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(2.8rem, 6vw, 5.6rem);
-    font-weight: 300;
-    letter-spacing: 0.12em;
-    line-height: 1.1;
+  .hero-name {
+    font-family: var(--font-body);
+    font-weight: 200;
+    letter-spacing: 0.32em;
+    line-height: 1.5;
     color: var(--white);
     text-transform: uppercase;
+    opacity: 0.85;
   }
 
-  .hero-title em {
-    font-style: normal;
-    color: var(--gold);
-  }
-
-  .hero-sub {
+  .hero-name .line1 {
     display: block;
-    width: 40px;
-    height: 1px;
-    background: var(--gold);
-    margin: 28px auto 0;
-    opacity: 0.8;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+  }
+
+  .hero-name .line2 {
+    display: block;
+    font-size: clamp(0.65rem, 1.1vw, 0.8rem);
+    letter-spacing: 0.42em;
+    opacity: 0.7;
   }
 
   /* ── SCROLL CTA ── */
@@ -316,10 +317,10 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <span class="hero-eyebrow"></span>
-    <h1 class="hero-title">Luján Pías <em>Real Estate</em></h1>
-    <span class="hero-sub"></span>
+    <img src="image/lplogoblanco.png" alt="Luján Pías Real Estate" class="hero-logo">
+    <p class="hero-name"><span class="line1">Luján Pías</span><span class="line2">Real Estate</span></p>
   </div>
   <a href="#conocenos" class="scroll-cta">
     <span>Conocé más</span>
