@@ -35,9 +35,15 @@
     z-index: 100;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-start;
     padding: 28px 48px;
-    mix-blend-mode: normal;
+  }
+
+  .nav-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
 
   .menu-btn {
@@ -53,6 +59,7 @@
     font-weight: 300;
     letter-spacing: 0.25em;
     text-transform: uppercase;
+    transition: color 0.4s ease;
   }
 
   .menu-btn span {
@@ -65,12 +72,89 @@
     display: block;
     width: 22px;
     height: 1px;
-    background: var(--white);
+    background: currentColor;
     transition: width 0.3s ease;
   }
 
   .menu-btn span i:nth-child(2) { width: 16px; }
   .menu-btn:hover span i { width: 22px; }
+
+  /* nav light mode (over white sections) */
+  nav.light-nav .menu-btn { color: #111; }
+
+  /* ── DROPDOWN ── */
+  .nav-dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    margin-top: 12px;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 16px 24px;
+    min-width: 200px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .nav-dropdown.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+  }
+
+  .nav-dropdown a {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    padding: 10px 0;
+    transition: color 0.4s ease, opacity 0.2s;
+    opacity: 0.85;
+  }
+
+  .nav-dropdown a:hover { opacity: 1; }
+
+  /* dropdown light mode */
+  nav.light-nav .nav-dropdown {
+    background: rgba(0,0,0,0.03);
+    border-color: rgba(0,0,0,0.07);
+  }
+  nav.light-nav .nav-dropdown a { color: #111; }
+
+  /* ── WHATSAPP FLOTANTE ── */
+  .wa-float {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 200;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #6abf7b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+    transition: transform 0.25s, box-shadow 0.25s;
+    text-decoration: none;
+  }
+
+  .wa-float:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+  }
+
+  .wa-float svg {
+    width: 28px; height: 28px; fill: #fff;
+  }
 
   /* ── HERO ── */
   #hero {
@@ -207,12 +291,18 @@
   #conocenos {
     background: var(--white);
     color: #1a1a1a;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 80px;
+    gap: 64px;
     min-height: 100vh;
   }
 
   .conocenos-foto {
+    flex-shrink: 0;
+    width: 280px;
+    height: 380px;
     overflow: hidden;
   }
 
@@ -225,10 +315,10 @@
   }
 
   .conocenos-texto {
+    max-width: 480px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 80px 72px;
   }
 
   .conocenos-eyebrow {
@@ -269,17 +359,22 @@
   }
 
   @media (max-width: 700px) {
-    #conocenos { grid-template-columns: 1fr; }
-    .conocenos-foto { height: 60vw; }
-    .conocenos-texto { padding: 52px 28px; }
+    #conocenos { flex-direction: column; padding: 60px 28px; gap: 36px; }
+    .conocenos-foto { width: 100%; height: 260px; }
   }
 
   /* ── PROYECTOS HEADER ── */
   #proyectos-header {
-    padding: 100px 48px 60px;
+    height: 580px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    padding: 0 48px;
     position: relative;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, #1e1e1e 0%, #0a0a0a 100%);
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, #1e1e1e 0%, #0a0a0a 100%);
+    gap: 0;
   }
 
   #proyectos-header::after {
@@ -293,17 +388,54 @@
 
   .proyectos-title {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-size: clamp(1.6rem, 3vw, 2.8rem);
     font-weight: 300;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--white);
     line-height: 1;
+    margin-bottom: 36px;
   }
 
   .proyectos-title em {
     font-style: normal;
     color: var(--gold);
+  }
+
+  .proyectos-sub {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: rgba(245,243,239,0.55);
+    line-height: 2;
+    max-width: 500px;
+    margin-bottom: 36px;
+  }
+
+  .proyectos-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--white);
+    opacity: 0.55;
+    transition: opacity 0.3s;
+  }
+
+  .proyectos-cta:hover { opacity: 1; }
+
+  .proyectos-cta span {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .proyectos-cta .arrow-circle {
+    animation: bounce 2.2s ease-in-out infinite;
   }
 
   /* ── PROYECTO ROW ── */
@@ -637,13 +769,25 @@
 
 <!-- NAV -->
 <nav>
-  <button class="menu-btn">
-    MENÚ
-    <span>
-      <i></i><i></i><i></i>
-    </span>
-  </button>
+  <div class="nav-wrapper">
+    <button class="menu-btn" onclick="toggleMenu()">
+      MENÚ
+      <span><i></i><i></i><i></i></span>
+    </button>
+    <div class="nav-dropdown" id="nav-dropdown">
+      <a href="#conocenos" onclick="closeMenu()">Conocenos</a>
+      <a href="#proyectos-header" onclick="closeMenu()">Nuestros Proyectos</a>
+      <a href="https://wa.me/5491131017901?text=Hola%21%20quisiera%20informaci%C3%B3n" target="_blank" onclick="closeMenu()">Contacto</a>
+    </div>
+  </div>
 </nav>
+
+<!-- WHATSAPP FLOTANTE -->
+<a class="wa-float" href="https://wa.me/5491131017901?text=Hola%21%20quisiera%20informaci%C3%B3n" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 2C8.268 2 2 8.268 2 16c0 2.444.638 4.737 1.752 6.724L2 30l7.52-1.716A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.6a11.56 11.56 0 0 1-5.88-1.604l-.42-.252-4.464 1.02.992-4.34-.276-.444A11.52 11.52 0 0 1 4.4 16C4.4 9.59 9.59 4.4 16 4.4S27.6 9.59 27.6 16 22.41 27.6 16 27.6zm6.32-8.648c-.348-.174-2.06-1.016-2.38-1.132-.32-.116-.552-.174-.784.174-.232.348-.9 1.132-1.104 1.364-.204.232-.406.26-.754.086-.348-.174-1.468-.54-2.796-1.724-1.032-.92-1.728-2.056-1.932-2.404-.204-.348-.022-.536.152-.708.158-.156.348-.406.522-.61.174-.204.232-.348.348-.58.116-.232.058-.436-.028-.61-.088-.174-.784-1.888-1.074-2.588-.284-.68-.572-.588-.784-.6-.204-.01-.436-.012-.668-.012s-.61.086-.928.434c-.32.348-1.218 1.19-1.218 2.9s1.246 3.364 1.42 3.596c.174.232 2.452 3.744 5.944 5.252.832.358 1.48.572 1.984.732.834.264 1.594.226 2.194.138.668-.1 2.06-.842 2.35-1.656.29-.814.29-1.512.204-1.656-.086-.144-.32-.232-.668-.406z"/>
+  </svg>
+</a>
 
 <!-- HERO -->
 <section id="hero">
@@ -678,7 +822,14 @@
 
 <!-- PROYECTOS HEADER -->
 <section id="proyectos-header">
-  <h2 class="proyectos-title">Nuestros <em>Proyectos</em></h2>
+  <h2 class="proyectos-title">Conocé <em>Nuestros Proyectos</em></h2>
+  <p class="proyectos-sub">En LP Real Estate trabajamos todos los días para acompañarte a alcanzar tus objetivos inmobiliarios con claridad, confianza y resultados.</p>
+  <a href="#proj-1" class="proyectos-cta">
+    <span>Conocé todos nuestros proyectos</span>
+    <div class="arrow-circle">
+      <svg viewBox="0 0 14 14"><polyline points="2,4 7,10 12,4"/></svg>
+    </div>
+  </a>
 </section>
 
 <!-- PROYECTO 1: DONNA FIORE — carousel left, text right -->
@@ -865,31 +1016,46 @@ function slide(btn, dir) {
   dots.forEach((d,i) => d.classList.toggle('active', i === cur));
 }
 
-// auto-advance
+// dot clicks only — no auto-advance
 document.querySelectorAll('.carousel-wrap').forEach(wrap => {
-  let cur = 0;
   const track = wrap.querySelector('.carousel-track');
-  const imgs = track.querySelectorAll('img');
   const dots = wrap.querySelectorAll('.carousel-dots span');
-  setInterval(() => {
-    cur = (cur + 1) % imgs.length;
-    track.dataset.cur = cur;
-    track.style.transform = `translateX(-${cur * 100}%)`;
-    dots.forEach((d,i) => d.classList.toggle('active', i === cur));
-  }, 4500);
-
-  // dot clicks
   dots.forEach((dot, i) => {
     dot.addEventListener('click', () => {
-      cur = i;
-      track.dataset.cur = cur;
-      track.style.transform = `translateX(-${cur * 100}%)`;
-      dots.forEach((d,j) => d.classList.toggle('active', j === cur));
+      track.dataset.cur = i;
+      track.style.transform = `translateX(-${i * 100}%)`;
+      dots.forEach((d,j) => d.classList.toggle('active', j === i));
     });
   });
 });
 
-// ── CLAMP TEXT to match carousel height ──
+// ── NAV COLOR ON SCROLL ──
+function updateNavColor() {
+  const checkY = 40;
+  const lightIds = ['conocenos', 'proj-2'];
+  let isLight = false;
+  lightIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.top <= checkY && rect.bottom > checkY) isLight = true;
+  });
+  document.querySelector('nav').classList.toggle('light-nav', isLight);
+}
+window.addEventListener('scroll', updateNavColor, { passive: true });
+updateNavColor();
+
+// ── MENU ──
+function toggleMenu() {
+  document.getElementById('nav-dropdown').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('nav-dropdown').classList.remove('open');
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.nav-wrapper')) closeMenu();
+});
+
 function escapeHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
