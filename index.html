@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luján Pías Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f3ef;
+    --gold: #c9a96e;
+    --mid: #1a1a1a;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Montserrat', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 28px 48px;
+    mix-blend-mode: normal;
+  }
+
+  .menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .menu-btn span {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .menu-btn span i {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: var(--white);
+    transition: width 0.3s ease;
+  }
+
+  .menu-btn span i:nth-child(2) { width: 16px; }
+  .menu-btn:hover span i { width: 22px; }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('image/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.28);
+    transform: scale(1.04);
+    transition: transform 8s ease;
+  }
+
+  #hero:hover .hero-bg { transform: scale(1); }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px;
+    animation: fadeUp 1.4s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .hero-eyebrow {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 32px;
+    opacity: 0.8;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6vw, 5.6rem);
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    line-height: 1.1;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 28px auto 0;
+    opacity: 0.8;
+  }
+
+  /* ── SCROLL CTA ── */
+  .scroll-cta {
+    position: absolute;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--white);
+    opacity: 0.6;
+    transition: opacity 0.3s;
+    animation: fadeUp 1.8s cubic-bezier(0.16,1,0.3,1) 0.4s both;
+  }
+
+  .scroll-cta:hover { opacity: 1; }
+
+  .scroll-cta span {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .arrow-circle {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: bounce 2.2s ease-in-out infinite;
+  }
+
+  .arrow-circle svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--white);
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+  /* ── BLOQUE 2: CONOCENOS ── */
+  #conocenos {
+    background: var(--white);
+    color: var(--black);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 48px;
+  }
+
+  .conocenos-inner {
+    max-width: 680px;
+    text-align: center;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+
+  .conocenos-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--black);
+    line-height: 1;
+  }
+
+  .conocenos-divider {
+    display: block;
+    width: 1px;
+    height: 60px;
+    background: var(--gold);
+    margin: 40px auto;
+    opacity: 0.5;
+  }
+
+  .conocenos-text {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    line-height: 2;
+    color: #555;
+  }
+
+  /* ── BLOQUE 3: PROYECTOS ── */
+  #proyectos {
+    background: var(--mid);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #proyectos::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+
+  .proyectos-inner {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .proyectos-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .proyectos-title em {
+    display: block;
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  /* ── KEYFRAMES ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(7px); }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    nav { padding: 20px 24px; }
+    .scroll-cta { bottom: 32px; }
+    #conocenos, #proyectos { padding: 80px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <button class="menu-btn">
+    MENÚ
+    <span>
+      <i></i><i></i><i></i>
+    </span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow"></span>
+    <h1 class="hero-title">Luján Pías <em>Real Estate</em></h1>
+    <span class="hero-sub"></span>
+  </div>
+  <a href="#conocenos" class="scroll-cta">
+    <span>Conocé más</span>
+    <div class="arrow-circle">
+      <svg viewBox="0 0 14 14"><polyline points="2,4 7,10 12,4"/></svg>
+    </div>
+  </a>
+</section>
+
+<!-- CONOCENOS -->
+<section id="conocenos">
+  <div class="conocenos-inner">
+    <span class="section-label">Quiénes somos</span>
+    <h2 class="conocenos-title">Conocenos</h2>
+    <span class="conocenos-divider"></span>
+    <p class="conocenos-text">Texto sobre la empresa irá aquí.</p>
+  </div>
+</section>
+
+<!-- PROYECTOS -->
+<section id="proyectos">
+  <div class="proyectos-inner">
+    <h2 class="proyectos-title">Nuestros <em>Proyectos</em></h2>
+  </div>
+</section>
+
+</body>
+</html>
