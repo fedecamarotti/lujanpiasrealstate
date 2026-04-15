@@ -35,79 +35,12 @@
     z-index: 100;
     display: flex;
     justify-content: flex-end;
-    align-items: flex-start;
-    padding: 28px 48px;
-  }
-
-  .nav-wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-
-  .menu-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
     align-items: center;
-    gap: 12px;
-    color: var(--white);
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 300;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    transition: color 0.4s ease;
+    padding: 28px 48px;
+    gap: 32px;
   }
 
-  .menu-btn span {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .menu-btn span i {
-    display: block;
-    width: 22px;
-    height: 1px;
-    background: currentColor;
-    transition: width 0.3s ease;
-  }
-
-  .menu-btn span i:nth-child(2) { width: 16px; }
-  .menu-btn:hover span i { width: 22px; }
-
-  /* nav light mode (over white sections) */
-  nav.light-nav .menu-btn { color: #111; }
-
-  /* ── DROPDOWN ── */
-  .nav-dropdown {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
-    margin-top: 12px;
-    background: rgba(255,255,255,0.03);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.07);
-    padding: 16px 24px;
-    min-width: 200px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-8px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-
-  .nav-dropdown.open {
-    opacity: 1;
-    pointer-events: all;
-    transform: translateY(0);
-  }
-
-  .nav-dropdown a {
+  nav a {
     font-family: var(--font-body);
     font-size: 11px;
     font-weight: 300;
@@ -115,19 +48,14 @@
     text-transform: uppercase;
     color: var(--white);
     text-decoration: none;
-    padding: 10px 0;
     transition: color 0.4s ease, opacity 0.2s;
     opacity: 0.85;
   }
 
-  .nav-dropdown a:hover { opacity: 1; }
+  nav a:hover { opacity: 1; }
 
-  /* dropdown light mode */
-  nav.light-nav .nav-dropdown {
-    background: rgba(0,0,0,0.03);
-    border-color: rgba(0,0,0,0.07);
-  }
-  nav.light-nav .nav-dropdown a { color: #111; }
+  /* nav light mode (over white sections) */
+  nav.light-nav a { color: #111; }
 
   /* ── WHATSAPP FLOTANTE ── */
   .wa-float {
@@ -774,17 +702,9 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-wrapper">
-    <button class="menu-btn" onclick="toggleMenu()">
-      MENÚ
-      <span><i></i><i></i><i></i></span>
-    </button>
-    <div class="nav-dropdown" id="nav-dropdown">
-      <a href="#conocenos" onclick="closeMenu()">Conocenos</a>
-      <a href="#proyectos-header" onclick="closeMenu()">Nuestros Proyectos</a>
-      <a href="https://wa.me/5491131017901?text=Hola%21%20quisiera%20informaci%C3%B3n" target="_blank" onclick="closeMenu()">Contacto</a>
-    </div>
-  </div>
+  <a href="#conocenos">Conocenos</a>
+  <a href="#proyectos-header">Proyectos</a>
+  <a href="https://wa.me/5491131017901?text=Hola%21%20quisiera%20informaci%C3%B3n" target="_blank">Contacto</a>
 </nav>
 
 <!-- WHATSAPP FLOTANTE -->
@@ -1050,16 +970,7 @@ function updateNavColor() {
 window.addEventListener('scroll', updateNavColor, { passive: true });
 updateNavColor();
 
-// ── MENU ──
-function toggleMenu() {
-  document.getElementById('nav-dropdown').classList.toggle('open');
-}
-function closeMenu() {
-  document.getElementById('nav-dropdown').classList.remove('open');
-}
-document.addEventListener('click', function(e) {
-  if (!e.target.closest('.nav-wrapper')) closeMenu();
-});
+
 
 function escapeHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
